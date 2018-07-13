@@ -1,0 +1,11 @@
+.SearchBar__container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.SearchBar__container__input {
+    width: 450px;
+    height: 60px;
+    border-radius: 9px;
+    font-size: 25px;
+}

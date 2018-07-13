@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import PhoneForm from "./components/PhoneForm/index";
 import PhoneInfoList from "./components/PhoneInfoList";
+import SearchBar from "./components/SearchBar";
 
 class App extends Component {
   id = 1;
@@ -14,7 +15,14 @@ class App extends Component {
         name: "이름",
         phoneNumber: "010-0000-0000"
       }
-    ]
+    ],
+    keyword: ""
+  };
+
+  _handleKeyword = keywords => {
+    this.setState({
+      keyword: keywords
+    });
   };
 
   _handleUpdate = (id, data) => {
@@ -52,19 +60,25 @@ class App extends Component {
   };
 
   render() {
-    const { information } = this.state;
+    const { information, keyword } = this.state;
+    const filteredList = information.filter(
+      info => info.name.indexOf(keyword) !== -1
+    );
+
+    console.log("keyword: " + keyword);
+    console.log("filteredList: " + filteredList);
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p className="App-intro" />
+
         <PhoneForm handleCreate={this._handleCreate} />
+        <SearchBar handleKeyword={this._handleKeyword} />
         <PhoneInfoList
-          data={information}
+          data={filteredList}
           handleRemove={this._handleRemove}
           onUpdate={this._handleUpdate}
         />

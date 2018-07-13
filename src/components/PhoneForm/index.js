@@ -9,9 +9,11 @@ class PhoneForm extends Component {
   };
 
   handleChange = e => {
+    const { name, phoneNumber } = this.state;
     this.setState({
       [e.target.name]: e.target.value
     });
+    console.log(name, phoneNumber);
   };
 
   handleSubmit = e => {
